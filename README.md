@@ -1,3 +1,3 @@
 # BookLibrarySDK
 
-Run using `node index.js local` or `node index.js sepolia`
+Run using `npm run start ${environment} ${command} ${firstArg?} ${secondArg?}`
