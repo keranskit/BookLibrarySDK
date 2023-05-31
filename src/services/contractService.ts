@@ -2,7 +2,7 @@ import { ethers } from 'ethers';
 import { INPUTS, NETWORKS } from '../constants/constants'
 import { InvalidNetworkException } from "../exceptions/InvalidNetworkException";
 import { InvalidEnvironmentDataException } from "../exceptions/InvalidEnvironmentDataException";
-import { AddBook, BorrowBook, CheckIsBookAvailable, CheckIsBookRented, ReturnBook, GetAllAvailableBooks } from "./contractInteractions";
+import { addBook, borrowBook, checkIsBookAvailable, checkIsBookRented, returnBook, getAllAvailableBooks } from "./contractInteractions";
 import { InvalidInputException } from "../exceptions/InvalidInputException";
 
 const bookLibraryJson = require('../contracts/BookLibrary.json');
@@ -12,27 +12,27 @@ Object.assign(commands, Object.entries(INPUTS).forEach(([k, v]) => {commands[k] 
 export async function proceedCommand(contract: ethers.Contract, signer: ethers.Wallet, command: string, firstParam: string, secondParam: number) {
     switch (command) {
         case commands.ADD_BOOK:
-            await AddBook(contract, firstParam, secondParam);
+            await addBook(contract, firstParam, secondParam);
 
             break;
         case commands.BORROW_BOOK:
-            await BorrowBook(contract, firstParam);
+            await borrowBook(contract, firstParam);
 
             break;
         case commands.RETURN_BOOK:
-            await ReturnBook(contract, firstParam);
+            await returnBook(contract, firstParam);
 
             break;
         case commands.GET_ALL_AVAILABLE_BOOKS:
-            await GetAllAvailableBooks(contract);
+            await getAllAvailableBooks(contract);
 
             break;
         case commands.CHECK_IS_BOOK_AVAILABLE:
-            await CheckIsBookAvailable(contract, firstParam);
+            await checkIsBookAvailable(contract, firstParam);
 
             break;
         case commands.CHECK_IS_BOOK_RENTED:
-            await CheckIsBookRented(contract, signer, firstParam);
+            await checkIsBookRented(contract, signer, firstParam);
 
             break;
         default:
